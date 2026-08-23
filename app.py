@@ -10,11 +10,14 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Extract data from form input
     input_data = request.form.to_dict()
     prediction = model.make_prediction(input_data)
-    # Render prediction in HTML
-    return render_template('index.html', prediction=prediction)
+
+    return render_template(
+        'index.html',
+        prediction=prediction,
+        form_data=input_data
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)
